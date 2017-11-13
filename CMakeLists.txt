@@ -1,9 +1,13 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.4)
 project (CMakeHelloWorld)
 
 #version number
 set (CMakeHelloWorld_VERSION_MAJOR 1)
 set (CMakeHelloWorld_VERSION_MINOR 0)
+
+# Find the BLAS stuff
+find_package(BLAS REQUIRED)
+message(STATUS ${BLAS_LIBRARIES})
 
 #include the subdirectory containing our libs
 add_subdirectory (Hello)
@@ -12,6 +16,6 @@ include_directories(Hello)
 add_executable (CMakeHelloWorld Hello HelloWorld.cpp)
 
 # Indicate which libraries to include during the link process.
-target_link_libraries (CMakeHelloWorld Hello)
+target_link_libraries (CMakeHelloWorld Hello ${BLAS_LIBRARIES})
 
-install (TARGETS CMakeHelloWorld DESTINATION bin)
+# install (TARGETS CMakeHelloWorld DESTINATION bin)
