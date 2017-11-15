@@ -8,19 +8,19 @@ addons:
       - ubuntu-toolchain-r-test
 
 before_install:
-  - wget -q -O install-icc.sh 'https://raw.githubusercontent.com/nemequ/icc-travis/master/install-icc.sh'
-  - chmod +x install-icc.sh
-  - ./install-icc.sh
+  # - wget -q -O install-icc.sh 'https://raw.githubusercontent.com/nemequ/icc-travis/master/install-icc.sh'
+  # - chmod +x install-icc.sh
+  # - ./install-icc.sh
 
 script:
   # - mkdir build
   - pwd
   - ls -la
   - source ~/.bashrc
-  - CC=icc CXX=icpc ./configure && make
+  # - CC=icc CXX=icpc ./configure && make
 
 after_success:
-  - '[[ ! -z "${INTEL_INSTALL_PATH}" ]] && uninstall_intel_software'
+  # - '[[ ! -z "${INTEL_INSTALL_PATH}" ]] && uninstall_intel_software'
 
 notifications:
   email: false
