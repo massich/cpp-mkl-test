@@ -6,11 +6,7 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - libblas-common
-      - libblas-dev
-      - libblas3
-      - liblapack-dev
-      - liblapack3
+    packages:
       - libopenblas-base
       - libopenblas-dev
 
