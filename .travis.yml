@@ -14,6 +14,8 @@ before_install:
 
 script:
   # - mkdir build
+  - pwd
+  - ls -la
   - source ~/.bashrc
   - CC=icc CXX=icpc ./configure && make
 
