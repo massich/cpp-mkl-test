@@ -6,9 +6,18 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - libblas-common
+      - libblas-dev
+      - libblas3
+      - liblapack-dev
+      - liblapack3
+      - libopenblas-base
+      - libopenblas-dev
+
 env:
   - BACKEND=OpenBLAS
   - BACKEND=Intel10_64lp_seq
+
 
 before_install:
   # - wget -q -O install-icc.sh 'https://raw.githubusercontent.com/nemequ/icc-travis/master/install-icc.sh'
