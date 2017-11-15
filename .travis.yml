@@ -16,7 +16,8 @@ script:
   # - mkdir build
   - pwd
   - ls -la
-  - tree ~
+  # - tree ~
+  - cmake --version
   - source ~/.bashrc
   # - CC=icc CXX=icpc ./configure && make
 
