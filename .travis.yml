@@ -16,9 +16,12 @@ before_install:
   # - ./install-icc.sh
 
 script:
-  - mkdir build
   - echo $BACKEND
+  - mkdir build
   - source ~/.bashrc
+  - cd build
+  - cmake ..
+  - make
   # - CC=icc CXX=icpc ./configure && make
 
 after_success:
