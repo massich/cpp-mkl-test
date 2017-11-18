@@ -18,9 +18,10 @@ env:
   - BACKEND=Intel10_64lp_seq
 
 before_install:
-  - wget -q -O install-icc.sh 'https://raw.githubusercontent.com/nemequ/icc-travis/master/install-icc.sh'
+  # - wget -q -O install-icc.sh 'https://raw.githubusercontent.com/nemequ/icc-travis/master/install-icc.sh'
   - chmod +x install-icc.sh
   - ./install-icc.sh
+  - source ~/.bashrc
 
 script:
   - echo $BACKEND
