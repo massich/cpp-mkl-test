@@ -150,12 +150,9 @@ echo "COMPONENTS=${COMPONENTS}" >> "${SILENT_CFG}"
 echo "PSET_MODE=install" >> "${SILENT_CFG}"
 echo "PHONEHOME_SEND_USAGE_DATA=${PHONE_INTEL}" >> "${SILENT_CFG}"
 if [ "x" != "x${INTEL_SERIAL_NUMBER}" ]; then
-    echo "branch TRUE"
-    echo "ACTIVATION_SERIAL_NUMBER=${INTEL_SERIAL_NUMBER}"
     echo "ACTIVATION_SERIAL_NUMBER=${INTEL_SERIAL_NUMBER}" >> "${SILENT_CFG}"
     echo "ACTIVATION_TYPE=serial_number" >> "${SILENT_CFG}"
 else
-    echo "branch FALSE"
     echo "ACTIVATION_TYPE=trial_lic" >> "${SILENT_CFG}"
 fi
 
