@@ -19,6 +19,7 @@ env:
 
 before_install:
   # - wget -q -O install-icc.sh 'https://raw.githubusercontent.com/nemequ/icc-travis/master/install-icc.sh'
+  - env
   - chmod +x install-icc.sh
   - ./install-icc.sh
   - source ~/.bashrc
