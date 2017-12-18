@@ -7,7 +7,7 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 
 # Find the BLAS stuff
 find_package(BLAS REQUIRED)
-message(STATUS ${BLAS_LIBRARIES})
+message(STATUS "BLAS LIB: ${BLAS_LIBRARIES}")
 
 #include the subdirectory containing our libs
 add_subdirectory (Hello)
