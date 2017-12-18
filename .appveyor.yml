@@ -40,24 +40,6 @@ install:
 
 before_build:
   - ps: |
-      if ([IO.File]::Exists("C:\logs\install-mkl-output.txt")) {
-        ECHO 'Checking if MKL installation end up (and successfully)'
-        TYPE C:\logs\install-mkl-output.txt
-      }
-      else{
-        ECHO 'install-mkl-output.txt is not written yet'
-        SLEEP 60
-      }
-  - ps: |
-      if ([IO.File]::Exists("C:\logs\install-mkl-output.txt")) {
-        ECHO 'Checking if MKL installation end up (and successfully)'
-        TYPE C:\logs\install-mkl-output.txt
-      }
-      else{
-        ECHO 'install-mkl-output.txt is not written yet'
-        SLEEP 60
-      }
-  - ps: |
       mkdir build
       cd build
       if ("$env:APPVEYOR_JOB_NAME" -match "Image: Visual Studio 2015") {
@@ -69,7 +51,8 @@ before_build:
           $env:generator="$env:generator Win64"
       }
       echo generator="$env:generator"
-      cmake .. -G "$env:generator" -DBLA_VENDOR=Intel
+      # cmake .. -G "$env:generator" -DBLA_VENDOR=Intel
+      cmake .. -DBLA_VENDOR=Intel
 
 build_script:
   - cmake --build . --config %CONFIGURATION% -- /m /v:minimal
