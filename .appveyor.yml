@@ -49,8 +49,7 @@ before_build:
           $env:generator="$env:generator Win64"
       }
       echo generator="$env:generator"
-      # cmake .. -G "$env:generator"
-      cmake ..
+      cmake .. -G "$env:generator" -DBLA_VENDOR=Intel
 
 build_script:
   - cmake --build . --config %CONFIGURATION% -- /m /v:minimal
