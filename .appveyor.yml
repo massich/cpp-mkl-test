@@ -38,6 +38,9 @@ install:
 
 before_build:
   - ps: |
+      ECHO 'Checking if MKL installation end up (and successfully)'
+      TYPE C:\install-mkl.log
+  - ps: |
       mkdir build
       cd build
       if ("$env:APPVEYOR_JOB_NAME" -match "Image: Visual Studio 2015") {
