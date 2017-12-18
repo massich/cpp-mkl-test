@@ -18,10 +18,6 @@ cache:
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
-artifacts:
-  - path: c:\logs\
-    name: logs
-
 install:
   - ps: MD c:\logs\
   - ps: |
@@ -34,7 +30,8 @@ install:
       if (![IO.File]::Exists("C:\w_mkl_2018.0.124.exe")) {
         ECHO 'w_mkl_2018.0.124.exe does not exist. Preparing to install MKL ..'
         Start-FileDownload 'http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12079/w_mkl_2018.0.124.exe' -FileName 'C:\w_mkl_2018.0.124.exe'
-        C:\w_mkl_2018.0.124.exe -s -l c:\logs\extract-mkl.log -a install --eula=accept --components=all --output='C:\install-mkl-output.txt' --installdir='C:\Program Files (x86)\IntelSWTools' --log='c:\logs\install-mkl.log'
+        C:\w_mkl_2018.0.124.exe -s -l c:\logs\extract-mkl.log -a install --eula=accept --components=all --output='C:\logs\install-mkl-output.txt' --installdir='C:\Program Files (x86)\IntelSWTools' --log='c:\logs\install-mkl.log'
+        SLEEP 60
         ECHO 'Done'
       }
       else{
@@ -44,8 +41,23 @@ install:
 
 before_build:
   - ps: |
-      ECHO 'Checking if MKL installation end up (and successfully)'
-      TYPE C:\install-mkl.log
+      if ([IO.File]::Exists("C:\logs\install-mkl-output.txt")) {
+        ECHO 'Checking if MKL installation end up (and successfully)'
+        TYPE C:\logs\install-mkl-output.txt
+      }
+      else{
+        ECHO 'install-mkl-output.txt is not written yet'
+        SLEEP 60
+      }
+  - ps: |
+      if ([IO.File]::Exists("C:\logs\install-mkl-output.txt")) {
+        ECHO 'Checking if MKL installation end up (and successfully)'
+        TYPE C:\logs\install-mkl-output.txt
+      }
+      else{
+        ECHO 'install-mkl-output.txt is not written yet'
+        SLEEP 60
+      }
   - ps: |
       mkdir build
       cd build
@@ -66,6 +78,16 @@ build_script:
 test_script:
 
 deploy: off
+
+artifacts:
+  - path: C:\logs\extract-mkl.log
+    name: extract-mkl.log
+
+  - path: C:\install-mkl-output.txt
+    name: install-mkl-output.txt
+
+  - path: c:\logs\install-mkl.log
+    name: install-mkl.log
 
 on_finish:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
