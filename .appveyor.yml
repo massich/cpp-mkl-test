@@ -32,6 +32,7 @@ install:
         Start-FileDownload 'http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12079/w_mkl_2018.0.124.exe' -FileName 'C:\w_mkl_2018.0.124.exe'
         C:\w_mkl_2018.0.124.exe -s -l c:\logs\extract-mkl.log -a install --eula=accept --components=all --output='C:\logs\install-mkl-output.txt' --installdir='C:\Program Files (x86)\IntelSWTools' --log='c:\logs\install-mkl.log' | Out-Null
         ECHO 'Done'
+        TYPE C:\logs\install-mkl-output.txt 
       }
       else{
         ECHO 'w_mkl_2018.0.124.exe already existed'
@@ -42,20 +43,10 @@ before_build:
   - ps: |
       mkdir build
       cd build
-      if ("$env:APPVEYOR_JOB_NAME" -match "Image: Visual Studio 2015") {
-          $env:generator="Visual Studio 14 2015"
-      } else {
-          $env:generator="Visual Studio 15 2017"
-      }
-      if ($env:PLATFORM -eq "x64") {
-          $env:generator="$env:generator Win64"
-      }
-      echo generator="$env:generator"
-      # cmake .. -G "$env:generator" -DBLA_VENDOR=Intel
       cmake .. -DBLA_VENDOR=Intel
 
 build_script:
-  - cmake --build . --config %CONFIGURATION% -- /m /v:minimal
+  - cmake --build .
 
 test_script:
 
@@ -70,6 +61,10 @@ artifacts:
 
   - path: c:\logs\install-mkl.log
     name: install-mkl.log
+
+on_failure:
+  - ps: |
+      TYPE CMakeCache.txt
 
 on_finish:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
