@@ -52,19 +52,11 @@ test_script:
 
 deploy: off
 
-artifacts:
-  - path: C:\logs\extract-mkl.log
-    name: extract-mkl.log
-
-  - path: C:\install-mkl-output.txt
-    name: install-mkl-output.txt
-
-  - path: c:\logs\install-mkl.log
-    name: install-mkl.log
-
 on_failure:
-  - ps: |
-      TYPE CMakeCache.txt
+  - appveyor PushArtifact CMakeCache.txt
+  - appveyor PushArtifact CMakeFiles/CMakeOutput.log
+  - appveyor PushArtifact CMakeFiles/CMakeError.log
+
 
 on_finish:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
