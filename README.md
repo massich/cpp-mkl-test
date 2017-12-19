@@ -1,4 +1,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/b6jv06rqce382gh7?svg=true)](https://ci.appveyor.com/project/massich/cpp-mkl-test)
+[![Build status](https://travis-ci.org/massich/cpp-mkl-test.svg?branch=master)](https://travis-ci.org/massich/cpp-mkl-test.svg?branch=master)
+
 
 This is an extremely simple example C++ application which uses CMake to build a hello that links in different manners to LAPACK.
 
