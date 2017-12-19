@@ -43,7 +43,7 @@ before_build:
   - ps: |
       mkdir build
       cd build
-      cmake .. -DBLA_VENDOR=Intel -DBLAS_DIR="C:\Program Files (x86)\IntelSWTools" 
+      cmake .. -DBLA_VENDOR=Intel -DBLAS_DIR="C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\mkl\lib\intel64_win\" 
 
 build_script:
   - cmake --build .
