@@ -56,11 +56,11 @@ install:
 before_build:
   - $env:cmake_cld="C:\cmake-3.8.0-win32-x86\share\cmake-3.8\Modules"
   - "ECHO %BLAS_VERSION%"
-  - "ECHO 'cmake .. -DBLA_VENDOR=%BLAS_VERSION% -DBLAS_DIR=$env:LD_MKL_PATH -DCMAKE_CURRENT_LIST_DIR_xxx=$env:cmake_cld'"
+  - "ECHO 'cmake .. -DBLA_VENDOR=%BLAS_VERSION% -DBLAS_DIR=C:\cmake-3.8.0-win32-x86\share\cmake-3.8\Modules'"
   - ps: |
       mkdir build
       cd build
-  - "cmake .. -DBLA_VENDOR=%BLAS_VERSION% -DBLAS_DIR=$env:LD_MKL_PATH -DCMAKE_CURRENT_LIST_DIR_xxx=$env:cmake_cld"
+  - "cmake .. -DBLA_VENDOR=%BLAS_VERSION% -DBLAS_DIR=$env:LD_MKL_PATH -DCMAKE_CURRENT_LIST_DIR_xxx=C:\cmake-3.8.0-win32-x86\share\cmake-3.8\Modules"
 
 build_script:
   - cmake --build .
