@@ -63,6 +63,7 @@
 # include(${CMAKE_CURRENT_LIST_DIR}/CheckFortranFunctionExists.cmake)
 # include(${CMAKE_CURRENT_LIST_DIR}/CMakePushCheckState.cmake)
 
+
 include(${CMAKE_CURRENT_LIST_DIR_xxx}/CheckFunctionExists.cmake)
 include(${CMAKE_CURRENT_LIST_DIR_xxx}/CheckFortranFunctionExists.cmake)
 include(${CMAKE_CURRENT_LIST_DIR_xxx}/CMakePushCheckState.cmake)
@@ -102,6 +103,7 @@ set(_combined_name)
 if (NOT _libdir)
   if (WIN32)
     set(_libdir ENV LIB)
+    message(' ---- [ sik ] --- _libdir: ${_libdir}' )
   elseif (APPLE)
     set(_libdir ENV DYLD_LIBRARY_PATH)
   else ()
@@ -128,6 +130,7 @@ foreach(_library ${_list})
         set(CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES} .so.3gf)
       endif ()
     endif ()
+    message(' ---- [ sik ] --- im here -- _libdir: ${_libdir}' )
     find_library(${_prefix}_${_library}_LIBRARY
       NAMES ${_library}
       PATHS ${_libdir}
@@ -137,6 +140,7 @@ foreach(_library ${_list})
     set(_libraries_work ${${_prefix}_${_library}_LIBRARY})
   endif()
 endforeach()
+message(' ---- [ sik ] ---  _libraries_work: ${_libraries_work}' )
 if(_libraries_work)
   # Test this combination of libraries.
   set(CMAKE_REQUIRED_LIBRARIES ${_flags} ${${LIBRARIES}} ${_thread})
