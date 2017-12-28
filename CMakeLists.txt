@@ -6,7 +6,8 @@ set (CMakeHelloWorld_VERSION_MAJOR 1)
 set (CMakeHelloWorld_VERSION_MINOR 0)
 
 # Find the BLAS stuff
-find_package(BLAS REQUIRED)
+# find_package(BLAS REQUIRED)
+include(my_FindBLAS)
 message(STATUS "BLAS LIB: ${BLAS_LIBRARIES}")
 
 #include the subdirectory containing our libs
