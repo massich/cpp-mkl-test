@@ -7,7 +7,14 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 
 # Find the BLAS stuff
 # find_package(BLAS REQUIRED)
-include(my_FindBLAS)
+
+# For the CI's set CMAKE_CURRENT_LIST_DIR_xxx manually from the cmake call
+# otherwise set as local default
+if (NOT EXISTS "${CMAKE_CURRENT_LIST_DIR_xxx}")
+  set( CMAKE_CURRENT_LIST_DIR_xxx "/usr/local/share/cmake-3.8/Modules/" )
+endif()
+
+include(my_FindBLAS.cmake)
 message(STATUS "BLAS LIB: ${BLAS_LIBRARIES}")
 
 #include the subdirectory containing our libs

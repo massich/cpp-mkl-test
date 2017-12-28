@@ -32,7 +32,8 @@ before_install:
   ############################################################################
   # Install a recent CMake (unless already installed on OS X)
   ############################################################################
-  - CMAKE_VERSION=3.10.0
+  # - CMAKE_VERSION=3.10.0
+  - CMAKE_VERSION=3.8.0
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       CMAKE_URL="https://cmake.org/files/v${CMAKE_VERSION%.[0-9]}/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz"
@@ -60,8 +61,8 @@ before_install:
 script:
   - cd ${TRAVIS_BUILD_DIR}
   - mkdir -p build && cd build
-  - echo "cmake .. -DBLAS_VENDOR=$BACKEND"
-  - cmake .. -DBLA_VENDOR=$BACKEND
+  - echo "cmake .. -DBLAS_VENDOR=$BACKEND -DCMAKE_CURRENT_LIST_DIR_xxx=${TRAVIS_BUILD_DIR}/deps/cmake/share/cmake-3.8/Modules"
+  - cmake .. -DBLA_VENDOR=$BACKEND -DCMAKE_CURRENT_LIST_DIR_xxx=${TRAVIS_BUILD_DIR}/deps/cmake/share/cmake-3.8/Modules
 
 after_success:
 
