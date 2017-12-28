@@ -16,3 +16,4 @@ cd build
 cmake .. && make
 ```
 
+<!-- dummy change to trigger appveyor -->
