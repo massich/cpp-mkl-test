@@ -20,7 +20,7 @@ cache:
 environment:
   matrix:
     # - BLAS_VERSION: Intel10_32
-    - BLAS_VERSION: Intel10_64lp
+    # - BLAS_VERSION: Intel10_64lp
     - BLAS_VERSION: Intel10_64lp_seq
     # - BLAS_VERSION: Intel
 
@@ -42,24 +42,18 @@ install:
         Start-FileDownload 'http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12079/w_mkl_2018.0.124.exe' -FileName 'C:\w_mkl_2018.0.124.exe'
         C:\w_mkl_2018.0.124.exe -s -l c:\logs\extract-mkl.log -a install --eula=accept --components=all --output='C:\logs\install-mkl-output.txt' --installdir='C:\Program Files (x86)\IntelSWTools' --log='c:\logs\install-mkl.log' | Out-Null
         ECHO 'Done'
-        TYPE C:\logs\install-mkl-output.txt 
-      }
-      else{
-        ECHO 'w_mkl_2018.0.124.exe already existed'
       }
       $env:LD_MKL_PATH='C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\mkl\lib\intel64_win\'
-      ECHO "mkl path is $env:LD_MKL_PATH"
-      ls $env:LD_MKL_PATH
-      $env:PATH="$env:LD_MKL_PATH;$env:PATH"
+      $env:LIB="$env:LD_MKL_PATH;$env:LIB"
 
 
 before_build:
   - "ECHO %BLAS_VERSION%"
-  - "ECHO 'cmake .. -DBLA_VENDOR=%BLAS_VERSION% -DBLAS_DIR=$env:LD_MKL_PATH'"
+  - "ECHO 'cmake .. -DBLA_VENDOR=%BLAS_VERSION%'"
   - ps: |
       mkdir build
       cd build
-  - "cmake .. -DBLA_VENDOR=%BLAS_VERSION% -DBLAS_DIR=$env:LD_MKL_PATH"
+  - "cmake .. -DBLA_VENDOR=%BLAS_VERSION%"
 
 build_script:
   - cmake --build .
