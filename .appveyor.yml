@@ -45,6 +45,7 @@ install:
       }
       $env:LD_MKL_PATH='C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\mkl\lib\intel64_win\'
       $env:LIB="$env:LD_MKL_PATH;$env:LIB"
+  - nuget install openblas -o C:\
 
 
 before_build:
