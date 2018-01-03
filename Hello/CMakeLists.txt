@@ -1,4 +1,4 @@
-add_library (Hello 
+add_library (Hello
   Speaker.h
   Speaker.cpp)
 
