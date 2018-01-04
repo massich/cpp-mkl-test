@@ -1,4 +1,5 @@
 cmake_minimum_required (VERSION 3.2)
+
 project (CMakeHelloWorld)
 
 #version number
@@ -7,7 +8,12 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 
 # Find the BLAS stuff
 find_package(BLAS REQUIRED)
-message(STATUS "BLAS LIB: ${BLAS_LIBRARIES}")
+find_path(BLAS_INCLUDE_DIRS NAMES cblas.h)
+
+message(STATUS "BLAS Include: ${BLAS_INCLUDE_DIRS}")
+message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
+
+include_directories(${BLAS_INCLUDE_DIRS})
 
 #include the subdirectory containing our libs
 add_subdirectory (Hello)
