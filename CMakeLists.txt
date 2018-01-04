@@ -9,7 +9,9 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 find_package(BLAS REQUIRED)
 message(STATUS "BLAS LIB: ${BLAS_LIBRARIES}")
 
-include_directories(SYSTEM C:\\nuget_openblas\\OpenBLAS.0.2.14.1\\lib\\native\\include\\)
+include_directories(SYSTEM
+  C:\\nuget_openblas\\OpenBLAS.0.2.14.1\\lib\\native\\include\\
+  C:\\OpenBLAS.0.2.14.1\\lib\\native\\include\\)
 
 #include the subdirectory containing our libs
 add_subdirectory (Hello)
