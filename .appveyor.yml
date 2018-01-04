@@ -13,9 +13,9 @@ image:
   # - Visual Studio 2017
 
 cache:
-  - C:\cmake-3.10.1-win32-x86
-  - C:\Program Files (x86)\IntelSWTools
-  - C:\w_mkl_2018.0.124.exe
+  # - C:\cmake-3.10.1-win32-x86
+  # - C:\Program Files (x86)\IntelSWTools
+  # - C:\w_mkl_2018.0.124.exe
 
 environment:
   matrix:

@@ -13,6 +13,8 @@ include_directories(SYSTEM
   C:\\nuget_openblas\\OpenBLAS.0.2.14.1\\lib\\native\\include\\
   C:\\OpenBLAS.0.2.14.1\\lib\\native\\include\\)
 
+include_directories(${BLAS_INCLUDE_DIRS})
+
 #include the subdirectory containing our libs
 add_subdirectory (Hello)
 include_directories(Hello)
