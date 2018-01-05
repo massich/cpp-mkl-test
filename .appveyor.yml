@@ -12,7 +12,7 @@ image:
   - Visual Studio 2015
   # - Visual Studio 2017
 
-cache:
+# cache:
   # - C:\cmake-3.10.1-win32-x86
   # - C:\Program Files (x86)\IntelSWTools
   # - C:\w_mkl_2018.0.124.exe
@@ -57,9 +57,16 @@ before_build:
   - cmake -DBLA_VENDOR=%BLAS_VERSION% -G "Visual Studio 14 2015 Win64" ..
 
 build_script:
-  - echo DONE
+  - cmake --build .
+
+after_build:
+  - appveyor PushArtifact CMakeCache.txt
+  - appveyor PushArtifact CMakeFiles/CMakeOutput.log
+  - appveyor PushArtifact CMakeFiles/CMakeError.log
+
 
 test_script:
+  - .\Debug\CMakeHelloWorld.exe
 
 deploy: off
 
