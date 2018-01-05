@@ -1,6 +1,7 @@
 #include "Speaker.h"
 #include <cblas.h>
 #include <iomanip>
+#include <sstream>
 
 using namespace Hello;
 
