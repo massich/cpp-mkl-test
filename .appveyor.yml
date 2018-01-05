@@ -103,7 +103,8 @@ after_build:
 
 
 test_script:
-  - .\Debug\CMakeHelloWorld.exe
+  - $env:PATH="C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\redist\intel64_win\mkl;$env:PATH"
+  - .\CMakeHelloWorld.exe
 
 deploy: off
 
