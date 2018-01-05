@@ -103,7 +103,10 @@ after_build:
 
 
 test_script:
-  - .\Debug\CMakeHelloWorld.exe
+  - cd C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\redist\intel64_win\mkl\
+  - cp *.dll C:\projects\cpp-mkl-test\build\
+  - cd C:\projects\cpp-mkl-test\build\
+  - .\CMakeHelloWorld.exe
 
 deploy: off
 
