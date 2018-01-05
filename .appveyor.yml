@@ -74,11 +74,20 @@ install:
   - set PATH="C:\Program Files\LLVM\bin";%PATH%
   - clang-cl -v
 
+  ############################################################################
+  # Setup the path to GCC
+  ############################################################################
+  - set PATH="C:\msys64\usr\bin";%PATH%
+  - gcc --version
+
 before_build:
-  - call "C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\bin\compilervars_arch.bat" intel64 vs2017
+  - call "C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\bin\compilervars_arch.bat" intel64 vs2015
   - cd C:\projects\cpp-mkl-test
   - "ECHO %BLAS_VERSION%"
   - "ECHO 'cmake -DBLA_VENDOR=%BLAS_VERSION% -GNinja .. '"
+  - cmake --version
+  - gcc --version
+  - ninja --version
   - ps: |
       mkdir build
       cd build
