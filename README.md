@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/b6jv06rqce382gh7?svg=true)](https://ci.appveyor.com/project/massich/cpp-mkl-test)
+[![Build status](https://ci.appveyor.com/api/projects/status/b6jv06rqce382gh7?branch=master&svg=true)](https://ci.appveyor.com/project/massich/cpp-mkl-test)
 [![Build status](https://travis-ci.org/massich/cpp-mkl-test.svg?branch=master)](https://travis-ci.org/massich/cpp-mkl-test.svg?branch=master)
 
 
