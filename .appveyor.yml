@@ -91,7 +91,7 @@ before_build:
   - ps: |
       mkdir build
       cd build
-  - cmake -DBLA_VENDOR=%BLAS_VERSION% -GNinja ..
+  - cmake -DBLA_VENDOR=%BLAS_VERSION% ..
 
 build_script:
   - cmake --build .
