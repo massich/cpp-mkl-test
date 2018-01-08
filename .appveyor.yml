@@ -84,14 +84,14 @@ before_build:
   - call "C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\bin\compilervars_arch.bat" intel64 vs2015
   - cd C:\projects\cpp-mkl-test
   - "ECHO %BLAS_VERSION%"
-  - "ECHO 'cmake -DBLA_VENDOR=%BLAS_VERSION% -GNinja .. '"
+  - "ECHO 'cmake -DBLA_VENDOR=%BLAS_VERSION% -G \"Visual Studio 14 2015 Win64\" .. '"
   - cmake --version
   - gcc --version
   - ninja --version
   - ps: |
       mkdir build
       cd build
-  - cmake -DBLA_VENDOR=%BLAS_VERSION% -GNinja ..
+  - cmake -DBLA_VENDOR=%BLAS_VERSION% -G "Visual Studio 14 2015 Win64" ..
 
 build_script:
   - cmake --build .
