@@ -1,5 +1,11 @@
 #include "Speaker.h"
+
+#ifdef __APPLE__
+#include <Accelerate/Accelerate.h>
+#else
 #include <cblas.h>
+#endif
+
 #include <iomanip>
 #include <sstream>
 
