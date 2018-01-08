@@ -30,6 +30,9 @@ matrix:
     - os: osx
       env:
         - BACKEND=Apple
+    - os: osx
+      env:
+        - BACKEND=Intel10_64lp_seq
 
 before_install:
   # Dependencies required by the CI are installed in ${TRAVIS_BUILD_DIR}/deps/
@@ -59,15 +62,25 @@ before_install:
   # Install MKL
   ############################################################################
   - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      export MKL_INSTALL_DIR=$(pwd)/intel
-      wget --quiet http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12070/l_mkl_2018.0.128.tgz
-      tar -xzf l_mkl_2018.0.128.tgz
-      cat l_mkl_2018.0.128/silent.cfg | grep -v EULA | grep -v PSET_INSTALL_DIR > silent.cfg
-      echo "ACCEPT_EULA=accept" >> silent.cfg
-      echo "PSET_INSTALL_DIR=${MKL_INSTALL_DIR}" >> silent.cfg
-      ./l_mkl_2018.0.128/install.sh --user-mode -s ./silent.cfg
-      export LD_LIBRARY_PATH="${MKL_INSTALL_DIR}/mkl/lib/intel64/:${LD_LIBRARY_PATH}"
+    if [[ "${TRAVIS_OS_NAME}" == "Intel10_64lp_seq" ]]; then
+      if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+        export MKL_INSTALL_DIR=$(pwd)/intel
+        wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12070/l_mkl_2018.0.128.tgz
+        tar -xzf l_mkl_2018.0.128.tgz
+        cat l_mkl_2018.0.128/silent.cfg | grep -v EULA | grep -v PSET_INSTALL_DIR > silent.cfg
+        echo "ACCEPT_EULA=accept" >> silent.cfg
+        echo "PSET_INSTALL_DIR=${MKL_INSTALL_DIR}" >> silent.cfg
+        ./l_mkl_2018.0.128/install.sh --user-mode -s ./silent.cfg
+        export LD_LIBRARY_PATH="${MKL_INSTALL_DIR}/mkl/lib/intel64/:${LD_LIBRARY_PATH}"
+      else  # Mac
+        export MKL_INSTALL_DIR=/opt/intel
+        wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12185/m_mkl_2017.4.220.dmg
+        hdiutil attach m_mkl_2017.4.220.dmg
+        cat l_mkl_2018.0.128/silent.cfg | grep -v EULA | grep -v PSET_INSTALL_DIR > silent.cfg
+        echo "ACCEPT_EULA=accept" >> silent.cfg
+        echo "PSET_INSTALL_DIR=${MKL_INSTALL_DIR}" >> silent.cfg
+        sudo /Volumes/m_mkl_2017.4.220/m_mkl_2017.4.220.app/Contents/MacOS/install.sh -s ./silent.cfg
+      fi
     fi
 
 script:
@@ -75,8 +88,16 @@ script:
   - mkdir -p build && cd build
   - echo "cmake .. -DBLAS_VENDOR=$BACKEND"
   - cmake .. -DBLA_VENDOR=$BACKEND
+  - make
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      ldd ./CMakeHelloWorld
+    else  # Mac
+      otool -L ./CMakeHelloWorld
+    fi
 
 after_success:
+  - ./CMakeHelloWorld
 
 notifications:
   email: false
