@@ -19,13 +19,17 @@ env:
 matrix:
   include:
     - os: linux
-      BACKEND=OpenBLAS
+      env:
+        - BACKEND=OpenBLAS
     - os: linux
-      BACKEND=ATLAS
+      env:
+        - BACKEND=ATLAS
     - os: linux
-      BACKEND=Intel10_64lp_seq
+      env:
+        - BACKEND=Intel10_64lp_seq
     - os: osx
-      BACKEND=Apple
+      env:
+        - BACKEND=Apple
 
 before_install:
   # Dependencies required by the CI are installed in ${TRAVIS_BUILD_DIR}/deps/
