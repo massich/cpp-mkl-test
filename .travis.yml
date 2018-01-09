@@ -105,8 +105,8 @@ script:
   - cd ${TRAVIS_BUILD_DIR}
   - mkdir -p build && cd build
   - echo "cmake .. -DBLAS_VENDOR=$BACKEND"
-  - cmake .. -DBLA_VENDOR=$BACKEND
-  - make
+  - cmake .. -DCMAKE_CXX_STANDARD=11 -DBLA_VENDOR=$BACKEND
+  - cmake --build .
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       ldd ./CMakeHelloWorld
