@@ -12,8 +12,6 @@ matrix:
     - os: linux
       env:
         - BACKEND=OpenBLAS
-        - CC=gcc-6
-        - CXX=g++-6
       addons:
         apt:
           sources:
@@ -21,30 +19,18 @@ matrix:
           packages:
             - libopenblas-base
             - libopenblas-dev
-            - g++-6
     - os: linux
       env:
         - BACKEND=ATLAS
-        - CC=gcc-6
-        - CXX=g++-6
       addons:
         sources:
           - ubuntu-toolchain-r-test
         apt:
           packages:
             - libatlas-base-dev
-            - g++-6
     - os: linux
       env:
         - BACKEND=Intel10_64lp_seq
-        - CC=gcc-6
-        - CXX=g++-6
-      addons:
-        sources:
-          - ubuntu-toolchain-r-test
-        apt:
-          packages:
-            - g++-6
     - os: osx
       env:
         - BACKEND=Apple
