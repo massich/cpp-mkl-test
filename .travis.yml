@@ -61,9 +61,13 @@ script:
   - cd ${TRAVIS_BUILD_DIR}
   - mkdir -p build && cd build
   - echo "cmake .. -DBLAS_VENDOR=$BACKEND"
-  - cmake .. -DBLA_VENDOR=$BACKEND
+  - cmake .. -DBLA_VENDOR=$BACKEND -DCMAKE_CXX_STANDARD=11
+  - cmake --build .
 
 after_success:
+  - ./CMakeHelloWorld
+  - ldd ./CMakeHelloWorld
+
 
 notifications:
   email: false
