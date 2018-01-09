@@ -7,11 +7,6 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-    packages:
-      - libopenblas-base
-      - libopenblas-dev
-      - libatlas-base-dev
-      - g++-4.9
 
 env:
   global:
@@ -22,12 +17,24 @@ matrix:
     - os: linux
       env:
         - BACKEND=OpenBLAS
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+      packages:
+        - libopenblas-base
+        - libopenblas-dev
+        - g++-6
     - os: linux
       env:
         - BACKEND=ATLAS
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+      packages:
+        - libatlas-base-dev
+        - g++-6
     - os: linux
       env:
         - BACKEND=Intel10_64lp_seq
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+      packages:
+        - g++-6
     - os: osx
       env:
         - BACKEND=Apple
