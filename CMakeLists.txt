@@ -8,12 +8,18 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 # Find the BLAS stuff
 find_package(BLAS REQUIRED)
 
-
 message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
 
 # find_path(BLAS_INCLUDE_DIRS NAMES cblas.h)
 # message(STATUS "BLAS Include: ${BLAS_INCLUDE_DIRS}")
 # include_directories(${BLAS_INCLUDE_DIRS})
+
+if (BLA_VENDOR MATCHES Intel)
+    find_path(MKL_INCLUDE_DIRS NAMES mkl.h
+              PATHS /opt/intel/mkl/include/)
+    message(STATUS "MKL Include: ${MKL_INCLUDE_DIRS}")
+    include_directories(${MKL_INCLUDE_DIRS})
+endif()
 
 # include_directories(SYSTEM
 #   C:\\nuget_openblas\\OpenBLAS.0.2.14.1\\lib\\native\\include\\

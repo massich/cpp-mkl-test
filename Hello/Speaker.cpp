@@ -1,10 +1,20 @@
 #include "Speaker.h"
 
+#if defined USE_MKL
+
+#include <mkl.h>
+#include <mkl_lapacke.h>
+
+#else
+
 #ifdef __APPLE__
 #include <Accelerate/Accelerate.h>
 #else
 #include <cblas.h>
 #endif
+
+#endif
+
 
 #include <iomanip>
 #include <sstream>
