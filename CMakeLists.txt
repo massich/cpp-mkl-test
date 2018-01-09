@@ -14,11 +14,13 @@ message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
 # message(STATUS "BLAS Include: ${BLAS_INCLUDE_DIRS}")
 # include_directories(${BLAS_INCLUDE_DIRS})
 
+set(BLA_DEFINITIONS)
 if (BLA_VENDOR MATCHES Intel)
     find_path(MKL_INCLUDE_DIRS NAMES mkl.h
               PATHS /opt/intel/mkl/include/)
     message(STATUS "MKL Include: ${MKL_INCLUDE_DIRS}")
     include_directories(${MKL_INCLUDE_DIRS})
+    set(BLA_DEFINITIONS USE_MKL)
 endif()
 
 # include_directories(SYSTEM
