@@ -76,14 +76,16 @@ before_install:
         echo "PSET_INSTALL_DIR=${MKL_INSTALL_DIR}" >> silent.cfg
         ./l_mkl_2018.0.128/install.sh --user-mode -s ./silent.cfg
         export LD_LIBRARY_PATH="${MKL_INSTALL_DIR}/mkl/lib/intel64/:${LD_LIBRARY_PATH}"
+        . ${MKL_INSTALL_DIR}/mkl/bin/mklvars.sh intel64 ilp64
       else  # Mac
         export MKL_INSTALL_DIR=/opt/intel
         wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12185/m_mkl_2017.4.220.dmg
         hdiutil attach m_mkl_2017.4.220.dmg
-        cat l_mkl_2018.0.128/silent.cfg | grep -v EULA | grep -v PSET_INSTALL_DIR > silent.cfg
+        cat /Volumes/m_mkl_2017.4.220/m_mkl_2017.4.220.app/Contents/MacOS/silent.cfg | grep -v EULA | grep -v PSET_INSTALL_DIR > silent.cfg
         echo "ACCEPT_EULA=accept" >> silent.cfg
         echo "PSET_INSTALL_DIR=${MKL_INSTALL_DIR}" >> silent.cfg
         sudo /Volumes/m_mkl_2017.4.220/m_mkl_2017.4.220.app/Contents/MacOS/install.sh -s ./silent.cfg
+        . /opt/intel/mkl/bin/mklvars.sh intel64 ilp64
       fi
     fi
 

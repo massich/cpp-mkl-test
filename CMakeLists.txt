@@ -16,8 +16,11 @@ message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
 
 set(BLA_DEFINITIONS)
 if (BLA_VENDOR MATCHES Intel)
+    if ($ENV{MKLROOT} STREQUAL "")
+        message(FATAL_ERROR "MKLROOT is not set. Please source the Intel MKL mklvars.sh file.")
+    endif()
     find_path(MKL_INCLUDE_DIRS NAMES mkl.h
-              PATHS /opt/intel/mkl/include/)
+              PATHS $ENV{MKLROOT}/include/)
     message(STATUS "MKL Include: ${MKL_INCLUDE_DIRS}")
     include_directories(${MKL_INCLUDE_DIRS})
     set(BLA_DEFINITIONS USE_MKL)
