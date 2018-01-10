@@ -103,7 +103,7 @@ script:
   - export CMAKE_OPTIONS="-DCMAKE_CXX_STANDARD=11 -DBLA_VENDOR=$BACKEND"
   - |
     if [[ "${BUILD_STATIC}" == "1" ]]; then
-      export CMAKE_OPTIONS="${CMAKE_OPTIONS} -DBLA_STATIC"
+      export CMAKE_OPTIONS="${CMAKE_OPTIONS} -DBLA_STATIC=1"
     fi
   - echo "cmake .. ${CMAKE_OPTIONS}"
   - cmake .. ${CMAKE_OPTIONS}
