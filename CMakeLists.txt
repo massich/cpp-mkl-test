@@ -6,7 +6,8 @@ set (CMakeHelloWorld_VERSION_MAJOR 1)
 set (CMakeHelloWorld_VERSION_MINOR 0)
 
 # Find the BLAS stuff
-find_package(BLAS REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+find_package(BLAS2 REQUIRED)
 
 message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
 
