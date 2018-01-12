@@ -59,6 +59,9 @@ matrix:
       env:
         - BACKEND=Intel10_64lp
         - BUILD_STATIC=1
+    - os: osx
+      env:
+        - BACKEND=OpenBLAS
 
 before_install:
   # Dependencies required by the CI are installed in ${TRAVIS_BUILD_DIR}/deps/
@@ -80,6 +83,10 @@ before_install:
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     else
       brew install cmake || brew upgrade cmake
+      if [[ "${BACKEND}" == "OpenBLAS" ]]; then
+        brew tap homebrew/science
+        brew install openblas
+      fi
     fi
   - which cmake
   - cmake --version
