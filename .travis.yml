@@ -35,6 +35,13 @@ matrix:
     - os: linux
       env:
         - BACKEND=Intel10_64lp_seq
+    - os: linux
+      env:
+        - BACKEND=Intel10_64lp
+        - BUILD_STATIC=1
+    - os: linux
+      env:
+        - BACKEND=Intel10_64lp
     - os: osx
       env:
         - BACKEND=Apple
@@ -44,6 +51,13 @@ matrix:
     - os: osx
       env:
         - BACKEND=Intel10_64lp_seq
+        - BUILD_STATIC=1
+    - os: osx
+      env:
+        - BACKEND=Intel10_64lp
+    - os: osx
+      env:
+        - BACKEND=Intel10_64lp
         - BUILD_STATIC=1
 
 before_install:
