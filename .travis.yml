@@ -128,7 +128,8 @@ script:
     fi
   - echo "cmake .. ${CMAKE_OPTIONS}"
   - cmake .. ${CMAKE_OPTIONS}
-  - cmake --build .
+  - make VERBOSE=1
+  # - cmake --build .
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       ldd ./CMakeHelloWorld
