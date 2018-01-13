@@ -36,7 +36,7 @@ install:
 
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
   - set "LIB=%CONDA_INSTALL_LOCN%\Library\lib;%LIB%"
-  - set "CPATH=%CONDA_INSTALL_LOCN%\Library\include;%CPATH%"
+  - set "INCLUDE=%CONDA_INSTALL_LOCN%\Library\include;%INCLUDE%"
 
 before_build:
   - ps: if (-Not (Test-Path .\build)) { mkdir build }
