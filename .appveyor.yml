@@ -41,7 +41,7 @@ install:
 before_build:
   - ps: if (-Not (Test-Path .\build)) { mkdir build }
   - cd build
-  - if [%WITH_FORTRAN%]==[no] cmake -G "Ninja" ..
+  - cmake -G "Ninja" ..
 
 build_script:
   - cmake --build .
