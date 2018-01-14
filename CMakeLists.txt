@@ -16,7 +16,7 @@ message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
 
 set(BLA_DEFINITIONS)
 
-CHECK_INCLUDE_FILE(HAS_MKL "mkl_cblas.h")
+CHECK_INCLUDE_FILE("mkl_cblas.h" HAS_MKL)
 
 if (HAS_MKL)
     if ("$ENV{MKLROOT}" STREQUAL "")
@@ -38,8 +38,8 @@ endif()
 #   C:\\OpenBLAS.0.2.14.1\\lib\\native\\include\\)
 
 #include the subdirectory containing our libs
-include_directories(Hello)
 add_subdirectory(Hello)
+include_directories(Hello)
 #indicate the entry point for the executable
 add_executable(CMakeHelloWorld Hello HelloWorld.cpp)
 
