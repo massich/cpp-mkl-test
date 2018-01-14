@@ -29,13 +29,14 @@ elseif (BLA_VENDOR MATCHES ATLAS)
     set(BLAS_LIBRARIES "${BLAS_LIBRARIES};${CBLAS_LIB}")
 endif()
 
+include_directories(Hello)
+
 # include_directories(SYSTEM
 #   C:\\nuget_openblas\\OpenBLAS.0.2.14.1\\lib\\native\\include\\
 #   C:\\OpenBLAS.0.2.14.1\\lib\\native\\include\\)
 
 #include the subdirectory containing our libs
 add_subdirectory(Hello)
-include_directories(Hello)
 #indicate the entry point for the executable
 add_executable(CMakeHelloWorld Hello HelloWorld.cpp)
 
