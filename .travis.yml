@@ -39,9 +39,21 @@ matrix:
       env:
         - BACKEND=Intel10_64lp
         - BUILD_STATIC=1
+      addons:
+        sources:
+          - ubuntu-toolchain-r-test
+        apt:
+          packages:
+            - libomp-dev
     - os: linux
       env:
         - BACKEND=Intel10_64lp
+      addons:
+        sources:
+          - ubuntu-toolchain-r-test
+        apt:
+          packages:
+            - libomp-dev
     - os: osx
       env:
         - BACKEND=Apple
