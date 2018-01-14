@@ -27,13 +27,16 @@ environment:
   global:
     CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
   matrix:
-    - BLAS: openblas
-    - BLAS: mkl
+    - BLAS_LIBRARY: openblas
+    - BLAS_LIBRARY: mkl
+
+init:
+  - echo %BLAS_LIBRARY%
 
 install:
   - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
   - conda config --add channels conda-forge --force
-  - conda install --yes --quiet cmake ninja %BLAS&
+  - conda install --yes --quiet cmake ninja %BLAS_LIBRARY&
 
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
   - set "LIB=%CONDA_INSTALL_LOCN%\Library\lib;%LIB%"
