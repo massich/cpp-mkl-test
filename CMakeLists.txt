@@ -9,6 +9,7 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 find_package(BLAS REQUIRED)
 
 message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
+message(STATUS "BLAS Vendor: ${BLAS_VENDOR}")
 
 # find_path(BLAS_INCLUDE_DIRS NAMES cblas.h)
 # message(STATUS "BLAS Include: ${BLAS_INCLUDE_DIRS}")
