@@ -15,14 +15,18 @@ message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
 # include_directories(${BLAS_INCLUDE_DIRS})
 
 set(BLA_DEFINITIONS)
-if (BLA_VENDOR MATCHES Intel)
+
+CHECK_INCLUDE_FILE("mkl.h" HAS_MKL)
+
+if (HAS_MKL)
     if ("$ENV{MKLROOT}" STREQUAL "")
-        message(FATAL_ERROR "MKLROOT is not set. Please source the Intel MKL mklvars.sh file.")
+        message(INFO "MKLROOT is not set. Please source the Intel MKL mklvars.sh file.")
+    else()
+        find_path(MKL_INCLUDE_DIRS NAMES mkl.h
+                  PATHS $ENV{MKLROOT}/include/)
+        message(STATUS "MKL Include: ${MKL_INCLUDE_DIRS}")
+        include_directories(${MKL_INCLUDE_DIRS})
     endif()
-    find_path(MKL_INCLUDE_DIRS NAMES mkl.h
-              PATHS $ENV{MKLROOT}/include/)
-    message(STATUS "MKL Include: ${MKL_INCLUDE_DIRS}")
-    include_directories(${MKL_INCLUDE_DIRS})
     set(BLA_DEFINITIONS USE_MKL)
 elseif (BLA_VENDOR MATCHES ATLAS)
     find_library(CBLAS_LIB NAMES cblas)
