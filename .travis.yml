@@ -125,7 +125,8 @@ script:
     if [[ "${BUILD_STATIC}" == "1" ]]; then
       export CMAKE_OPTIONS="${CMAKE_OPTIONS} -DBLA_STATIC=ON"
     fi
-  - echo "LIBRARY_PATH: $LD_LIBRARY_PATH $DYLD_LIBRARY_PATH"
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then echo "LIBRARY_PATH: $LD_LIBRARY_PATH"; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then echo "LIBRARY_PATH: $DYLD_LIBRARY_PATH"; fi
   - echo "cmake .. ${CMAKE_OPTIONS}"
   - cmake .. ${CMAKE_OPTIONS}
   - make VERBOSE=1
