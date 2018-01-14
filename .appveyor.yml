@@ -11,6 +11,7 @@ configuration: Release
 
 init:
   - git config --global core.autocrlf input
+  - echo %BLAS_LIBRARY%
 
 clone_depth: 5
 
@@ -29,9 +30,6 @@ environment:
   matrix:
     - BLAS_LIBRARY: openblas
     - BLAS_LIBRARY: mkl
-
-init:
-  - echo %BLAS_LIBRARY%
 
 install:
   - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
