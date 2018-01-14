@@ -615,7 +615,7 @@ if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
             "${MAIN} ${THREAD} mkl_core${BLAS_mkl_DLL_SUFFIX}")
         endforeach()
       endforeach()
-    else ()
+    else ()  # UNIX
       if (BLA_VENDOR STREQUAL "Intel10_32" OR BLA_VENDOR STREQUAL "All")
         list(APPEND BLAS_SEARCH_LIBS
           "mkl_intel mkl_intel_thread mkl_core guide")
@@ -629,7 +629,8 @@ if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
         # mkl >= 10.3
         if (CMAKE_C_COMPILER MATCHES ".+gcc")
           list(APPEND BLAS_SEARCH_LIBS
-            "mkl_intel_lp64 mkl_gnu_thread mkl_core gomp")
+            # "mkl_intel_lp64 mkl_gnu_thread mkl_core gomp")
+            "mkl_intel_lp64 mkl_intel_thread mkl_core iomp5")
         else ()
           list(APPEND BLAS_SEARCH_LIBS
             "mkl_intel_lp64 mkl_intel_thread mkl_core iomp5")
