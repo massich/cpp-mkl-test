@@ -9,21 +9,13 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 find_package(BLAS REQUIRED)
 
 message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
-message(STATUS "BLAS Vendor: ${BLAS_VENDOR}")
 
 # find_path(BLAS_INCLUDE_DIRS NAMES cblas.h)
 # message(STATUS "BLAS Include: ${BLAS_INCLUDE_DIRS}")
 # include_directories(${BLAS_INCLUDE_DIRS})
 
 set(BLA_DEFINITIONS)
-if (BLA_VENDOR MATCHES Intel)
-    if ("$ENV{MKLROOT}" STREQUAL "")
-        message(FATAL_ERROR "MKLROOT is not set. Please source the Intel MKL mklvars.sh file.")
-    endif()
-    find_path(MKL_INCLUDE_DIRS NAMES mkl.h
-              PATHS $ENV{MKLROOT}/include/)
-    message(STATUS "MKL Include: ${MKL_INCLUDE_DIRS}")
-    include_directories(${MKL_INCLUDE_DIRS})
+if (BLA_VENDOR MATCHES Intel OR BLAS_LIBRARIES MATCHES mkl)
     set(BLA_DEFINITIONS USE_MKL)
 elseif (BLA_VENDOR MATCHES ATLAS)
     find_library(CBLAS_LIB NAMES cblas)
