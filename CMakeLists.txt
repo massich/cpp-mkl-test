@@ -16,7 +16,7 @@ message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
 
 set(BLA_DEFINITIONS)
 
-CHECK_INCLUDE_FILE("mkl_cblas.h" HAS_MKL)
+CHECK_INCLUDE_FILE("mkl.h" HAS_MKL)
 
 if (HAS_MKL)
     if ("$ENV{MKLROOT}" STREQUAL "")
