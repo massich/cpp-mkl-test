@@ -84,7 +84,6 @@ before_install:
     else
       brew install cmake || brew upgrade cmake
       if [[ "${BACKEND}" == "OpenBLAS" ]]; then
-        brew tap homebrew/science
         brew install openblas
       fi
     fi
