@@ -31,12 +31,6 @@ matrix:
     - os: linux
       env:
         - BACKEND=Intel10_64lp_seq
-    - os: osx
-      env:
-        - BACKEND=Apple
-    - os: osx
-      env:
-        - BACKEND=Intel10_64lp_seq
 
 before_install:
   # Dependencies required by the CI are installed in ${TRAVIS_BUILD_DIR}/deps/
@@ -93,7 +87,7 @@ script:
   - cd ${TRAVIS_BUILD_DIR}
   - mkdir -p build && cd build
   - echo "cmake .. -DBLAS_VENDOR=$BACKEND"
-  - cmake .. -DCMAKE_CXX_STANDARD=11 -DBLA_VENDOR=$BACKEND
+  - cmake .. -DCMAKE_CXX_STANDARD=11 -DBLA_VENDOR=$BACKEND -DBLAS_VERBOSE=ON
   - cmake --build .
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
@@ -104,6 +98,10 @@ script:
 
 after_success:
   - ./CMakeHelloWorld
+
+after_failure:
+  - cat CMakeFiles/CMakeOutput.log
+  - cat CMakeFiles/CMakeError.log
 
 notifications:
   email: false

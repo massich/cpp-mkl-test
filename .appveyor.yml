@@ -72,7 +72,7 @@ before_build:
   - ps: |
       mkdir build
       cd build
-  - cmake -DBLA_STATIC=%BUILD_STATIC% -DBLA_VENDOR=%BLAS_VERSION% -G "Visual Studio 14 2015 Win64" ..
+  - cmake -DBLAS_VERBOSE=ON -DBLA_STATIC=%BUILD_STATIC% -DBLA_VENDOR=%BLAS_VERSION% -G "Visual Studio 14 2015 Win64" ..
 
 build_script:
   - cmake --build .
