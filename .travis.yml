@@ -105,5 +105,9 @@ script:
 after_success:
   - ./CMakeHelloWorld
 
+after_failure:
+  - cat CMakeFiles/CMakeOutput.log
+  - cat CMakeFiles/CMakeError.log
+
 notifications:
   email: false
