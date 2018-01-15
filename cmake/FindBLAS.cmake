@@ -490,10 +490,10 @@ endif ()
 #BLAS in intel mkl 10 library? (em64t 64bit)
 if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
  if (UNIX)
-  set(LM "-lm")
-  if (NOT APPLE)
-    set(LM "${LM} -ldl")
-  endif ()
+  set(LM "-lm -ldl")
+  # if (NOT APPLE)
+  #   set(LM "${LM} -ldl")
+  # endif ()
  endif ()
  if (CMAKE_C_COMPILER_LOADED OR CMAKE_CXX_COMPILER_LOADED)
   if(BLAS_FIND_QUIETLY OR NOT BLAS_FIND_REQUIRED)
@@ -654,9 +654,12 @@ if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
   endif ()
 
   foreach (IT ${BLAS_SEARCH_LIBS})
+    message("----sik---- DB: get in")
     string(REPLACE " " ";" SEARCH_LIBS ${IT})
     if (${_LIBRARIES})
+      message("----sik---- DB: get in _libraries is true")
     else ()
+      message("----sik---- DB: get in _libraries is false")
       check_fortran_libraries(
         ${_LIBRARIES}
         BLAS
@@ -665,6 +668,8 @@ if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
         "${SEARCH_LIBS}"
         "${CMAKE_THREAD_LIBS_INIT};${LM}"
         )
+      message("----sik---- DB: libraries: ${_LIBRARIES} is  ${${_LIBRARIES}}")
+      message("----sik---- DB: it : ${IT} ")
     endif ()
   endforeach ()
 
