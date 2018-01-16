@@ -32,7 +32,10 @@ include_directories(Hello)
 # indicate the entry point for the executable
 add_executable(CMakeHelloWorld Hello HelloWorld.cpp)
 
+# BLAS libraries compile dynamically against threads
+LIST(APPEND CMAKE_THREAD_LIBS_INIT ${LM})
+
 # Indicate which libraries to include during the link process.
-target_link_libraries(CMakeHelloWorld Hello ${BLAS_LIBRARIES})
+target_link_libraries(CMakeHelloWorld Hello ${BLAS_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
 # install (TARGETS CMakeHelloWorld DESTINATION bin)
