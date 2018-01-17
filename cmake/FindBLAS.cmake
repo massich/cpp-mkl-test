@@ -565,7 +565,7 @@ if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
             "${MAIN} ${THREAD} mkl_core${BLAS_mkl_DLL_SUFFIX}")
         endforeach()
       endforeach()
-    else ()
+    else () # BLA_F95==True && WIN32==False
       if (BLA_VENDOR STREQUAL "Intel10_32" OR BLA_VENDOR STREQUAL "All")
         list(APPEND BLAS_SEARCH_LIBS
           "mkl_blas95 mkl_intel mkl_intel_thread mkl_core guide")
@@ -590,7 +590,7 @@ if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
           "mkl_intel_lp64 mkl_sequential mkl_core")
       endif ()
     endif ()
-  else ()
+  else () # BLA_F95==False
     set(BLAS_mkl_SEARCH_SYMBOL sgemm)
     set(_LIBRARIES BLAS_LIBRARIES)
     if (WIN32)
@@ -633,7 +633,7 @@ if (BLA_VENDOR MATCHES "Intel" OR BLA_VENDOR STREQUAL "All")
             "${MAIN} ${THREAD} mkl_core${BLAS_mkl_DLL_SUFFIX}")
         endforeach()
       endforeach()
-    else ()  # UNIX
+    else ()  # BLA_F95==False && UNIX
       if (BLA_VENDOR STREQUAL "Intel10_32" OR BLA_VENDOR STREQUAL "All")
         list(APPEND BLAS_SEARCH_LIBS
           "mkl_intel mkl_intel_thread mkl_core guide")
