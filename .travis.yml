@@ -73,8 +73,6 @@ before_install:
     fi
 
 script:
-  - ${MKLROOT}/tools/mkl_link_tool -libs --parallel=no --compiler=gnu_c --os=lnx --arch=intel64 --linking=static --interface=lp64
-  - ${MKLROOT}/tools/mkl_link_tool -libs --parallel=yes --compiler=gnu_c --os=lnx --arch=intel64 --linking=static --interface=lp64
   - cd ${TRAVIS_BUILD_DIR}
   - mkdir -p build && cd build
   - export CMAKE_OPTIONS="-DCMAKE_CXX_STANDARD=11 -DBLA_VENDOR=$BACKEND"
