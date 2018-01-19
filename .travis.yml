@@ -18,10 +18,10 @@ matrix:
       env:
         - BACKEND=Intel10_64lp_seq
         - BUILD_STATIC=1
-    # - os: linux
-    #   env:
-    #     - BACKEND=Intel10_64lp
-    #     - BUILD_STATIC=1
+    - os: linux
+      env:
+        - BACKEND=Intel10_64lp
+        - BUILD_STATIC=1
 
 before_install:
   # Dependencies required by the CI are installed in ${TRAVIS_BUILD_DIR}/deps/
