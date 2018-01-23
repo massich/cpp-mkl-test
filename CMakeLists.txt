@@ -7,6 +7,8 @@ set (CMakeHelloWorld_VERSION_MINOR 0)
 
 # Find the BLAS stuff
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+find_package (Threads REQUIRED)
 find_package(BLAS REQUIRED)
 
 message(STATUS "BLAS Libraries: ${BLAS_LIBRARIES}")
@@ -28,14 +30,14 @@ endif()
 
 # include the subdirectory containing our libs
 add_subdirectory(Hello)
-include_directories(Hello)
+target_include_directories(Hello)
 # indicate the entry point for the executable
 add_executable(CMakeHelloWorld Hello HelloWorld.cpp)
 
-# BLAS libraries compile dynamically against threads
-LIST(APPEND CMAKE_THREAD_LIBS_INIT ${LM})
+# # BLAS libraries compile dynamically against threads
+# LIST(APPEND CMAKE_THREAD_LIBS_INIT ${LM})
 
 # Indicate which libraries to include during the link process.
-target_link_libraries(CMakeHelloWorld Hello ${BLAS_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(CMakeHelloWorld Hello ${BLAS_LIBRARIES} Threads::Threads ${LM})
 
 # install (TARGETS CMakeHelloWorld DESTINATION bin)
